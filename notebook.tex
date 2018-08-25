@@ -1,0 +1,1608 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Code}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{notebook-relacionado-con-el-pronuxf3stico-del-precio-de-venta-de-los-productos-agricolas.}{%
+\section{Notebook relacionado con el pronóstico del precio de venta de
+los productos
+agricolas.}\label{notebook-relacionado-con-el-pronuxf3stico-del-precio-de-venta-de-los-productos-agricolas.}}
+
+    Teniendo en cuenta que las dos funciones objetivo del proyecto de
+investigación titulado: \textbf{Modelo de optimización multiobjetivo
+para la programación de la producción agrícola a pequeña escala en
+Santander, Colombia}, tienen en consideración el parámetro de precios de
+venta de cada kilo de producto agrícola recogido durante el horizonte de
+planeación (e.g.~Objetivo 1: Maximizar ingresos por ventas, Objetivo 2:
+Minimizar riesgo financiero), y que la prueba del modelo se realizará en
+un contexto local (Departamento de Santander); se propone la estimación
+de los precios a partir de la formulación de modelos auto regresivo. Los
+modelos son desarrollados a partir del análisis histórico de los precios
+de venta por kilogramo de cada producto en la central de abastos de
+Bucaramanga, en un periodo comprendido entre la primera semana de enero
+de 2013 hasta la última semana de diciembre de 2017.
+
+    El Notebook está estructurado de tal manera que sea posible hacer un
+seguimiento a la construción de los modelos de pronósticos. Para ello,
+se divide en las siguientes secciones:
+
+Section \ref{seccion201}
+
+Section \ref{seccion202}
+
+Section \ref{seccion203}
+
+Section \ref{seccion204}
+
+Section \ref{seccion205}
+
+Section \ref{seccion206}
+
+    \hypertarget{adquisiciuxf3n-de-los-datos-y-depuraciuxf3n}{%
+\section{ 1. Adquisición de los datos y
+depuración}\label{adquisiciuxf3n-de-los-datos-y-depuraciuxf3n}}
+
+    En la primera sección se cargan los paquetes necesarios para trabajar
+los modelos de pronósticos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{library}\PY{p}{(}randtests\PY{p}{)}\PY{c+c1}{\PYZsh{}Evaluar pruebas de estacionariedad}
+        \PY{k+kn}{library}\PY{p}{(}tseries\PY{p}{)}  \PY{c+c1}{\PYZsh{}Evaluar pruebas de estacionariedad}
+        \PY{k+kn}{library}\PY{p}{(}urca\PY{p}{)}     \PY{c+c1}{\PYZsh{}Evaluar la presencia de raices unitarias}
+        \PY{k+kn}{library}\PY{p}{(}Amelia\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}lmtest\PY{p}{)}   \PY{c+c1}{\PYZsh{}Generar modelos de regresión lineal}
+        \PY{k+kn}{library}\PY{p}{(}mice\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}readr\PY{p}{)}    \PY{c+c1}{\PYZsh{}Cargar archivos csv}
+        \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}  \PY{c+c1}{\PYZsh{}Construcción de gráficas}
+        \PY{k+kn}{library}\PY{p}{(}forecast\PY{p}{)} \PY{c+c1}{\PYZsh{}Modelos de pronóstico}
+        \PY{k+kn}{library}\PY{p}{(}reshape2\PY{p}{)} \PY{c+c1}{\PYZsh{}Construcción de gráficas}
+        \PY{k+kn}{library}\PY{p}{(}VIM\PY{p}{)}      \PY{c+c1}{\PYZsh{}IMputación de datos}
+\end{Verbatim}
+
+
+    Ahora es cargada la base de datos de precios y se observan los campos
+que la componen:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} DATA \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{DATA\PYZus{}BUCARA.csv\PYZdq{}}\PY{p}{,} header\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,} sep\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{;\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}carga desde archivo .csv ubicado en el directorio raiz}
+        DATA \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}DATA\PY{p}{)} \PY{c+c1}{\PYZsh{}transformación de los datos a formato Data Frame}
+\end{Verbatim}
+
+
+    \hypertarget{descripciuxf3n-del-dataset}{%
+\subsection{Descripción del Dataset}\label{descripciuxf3n-del-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Visualización de los 5 primeros datos\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{head}\PY{p}{(}DATA\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Características de los datos\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}str\PY{p}{(}DATA\PY{p}{)}\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Resumen descriptivo de los datos\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{summary}\PY{p}{(}DATA\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Visualización de los datos perdidos\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Con el propósito de identificar si existen datos perdidos (una aproximación visual), se adapta una función creada por Nicholas Tierney https://njtierney.github.io/}
+         
+         \PY{c+c1}{\PYZsh{}Inicio de la función}
+         ggplot\PYZus{}missing \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)}\PY{p}{\PYZob{}}
+           
+           x \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} 
+             is.na \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+             melt \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+             ggplot\PY{p}{(}data \PY{o}{=} \PY{l+m}{.}\PY{p}{,}
+                    aes\PY{p}{(}x \PY{o}{=} Var2\PY{p}{,}
+                        y \PY{o}{=} Var1\PY{p}{)}\PY{p}{)} \PY{o}{+}
+             geom\PYZus{}raster\PY{p}{(}aes\PY{p}{(}fill \PY{o}{=} value\PY{p}{)}\PY{p}{)} \PY{o}{+}
+             scale\PYZus{}fill\PYZus{}grey\PY{p}{(}name \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                             labels \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Presentes\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Perdidos\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+             theme\PYZus{}minimal\PY{p}{(}\PY{p}{)} \PY{o}{+} 
+             theme\PY{p}{(}axis.text.x  \PY{o}{=} element\PYZus{}text\PY{p}{(}angle\PY{o}{=}\PY{l+m}{45}\PY{p}{,} vjust\PY{o}{=}\PY{l+m}{0.5}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+             labs\PY{p}{(}x \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Variables en el Dataset\PYZdq{}}\PY{p}{,}
+                  y \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Filas / observaciones\PYZdq{}}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{}Fin de la Función}
+         ggplot\PYZus{}missing\PY{p}{(}DATA\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Visualización de los 5 primeros datos"
+
+    \end{Verbatim}
+
+    \begin{tabular}{r|llllllllllllllllllllllllll}
+ Fecha & Ahuyama & Ajo & Arverja & Cebolla.Cabezona & Cebolla.junca & Cilantro & Cebada & Maiz & Frijol & ... & Banano & Lulo & Mora & Papaya & Patilla & Pinna & Arracacha & Papa & Plátano & Yuca\\
+\hline
+	 04/01/2013 & 676        & 3243       & 2158       & 933        & 920        & 5569       & 1760       & 2040       & 1481       & ...        &  722       & 1749       & 1497       & 1063       & 600        & 625        & 1130       & 814        & 1291       & 1240      \\
+	 11/01/2013 & 652        & 3268       & 1921       & 823        & 665        & 7317       & 1680       & 1920       & 1578       & ...        &  819       & 1732       & 1638       & 1093       & 600        & 632        & 1149       & 799        & 1163       & 1108      \\
+	 12/01/2013 & 614        & 3298       & 1761       & 718        & 724        & 6250       & 1840       & 1947       & 1630       & ...        &  762       & 1576       & 1843       & 1041       & 607        & 579        & 1067       & 781        & 1103       &  856      \\
+	 19/01/2013 & 636        & 3384       & 1750       & 700        & 604        & 3854       & 1653       & 1947       & 1599       & ...        &  799       & 1650       & 1970       & 1034       & 663        & 635        & 1075       & 783        & 1158       &  836      \\
+	 26/01/2013 & 619        & 3400       & 1905       & 625        & 646        & 4333       & 1653       & 1920       & 1451       & ...        &  967       & 1599       & 2067       & 1073       & 698        & 626        & 1013       & 787        & 1075       &  846      \\
+	 02/02/2013 & 620        & 3332       & 1892       & 630        & 657        & 6833       & 1707       & 1893       & 1719       & ...        & 1152       & 1881       & 2304       & 1200       & 727        & 716        &  979       & 735        & 1140       &  833      \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Características de los datos"
+'data.frame':	261 obs. of  26 variables:
+ \$ Fecha           : Factor w/ 260 levels "01/02/2014","01/03/2014",..: 27 88 99 157 217 10 73 133 192 11 {\ldots}
+ \$ Ahuyama         : int  676 652 614 636 619 620 632 600 581 600 {\ldots}
+ \$ Ajo             : int  3243 3268 3298 3384 3400 3332 3384 3393 3450 3520 {\ldots}
+ \$ Arverja         : int  2158 1921 1761 1750 1905 1892 1711 1893 1975 3520 {\ldots}
+ \$ Cebolla.Cabezona: int  933 823 718 700 625 630 633 575 506 575 {\ldots}
+ \$ Cebolla.junca   : int  920 665 724 604 646 657 622 668 623 689 {\ldots}
+ \$ Cilantro        : int  5569 7317 6250 3854 4333 6833 7719 9619 NA NA {\ldots}
+ \$ Cebada          : int  1760 1680 1840 1653 1653 1707 1653 1667 1808 1747 {\ldots}
+ \$ Maiz            : int  2040 1920 1947 1947 1920 1893 1960 1920 2028 1960 {\ldots}
+ \$ Frijol          : int  1481 1578 1630 1599 1451 1719 1667 1830 1773 2368 {\ldots}
+ \$ Habichuela      : int  961 1228 1484 1624 1272 1391 1604 1951 1820 1624 {\ldots}
+ \$ Lechuga         : int  1186 1146 1029 1013 876 904 919 1098 1172 1496 {\ldots}
+ \$ Perejil         : int  5986 5979 5823 4750 4000 4698 4250 5177 NA 6156 {\ldots}
+ \$ Pimenton        : int  1533 1106 1029 1274 1393 1910 2234 2378 1843 1880 {\ldots}
+ \$ Repollo.blanco  : int  507 510 513 530 488 492 480 480 481 477 {\ldots}
+ \$ Tomate          : int  1085 913 1167 1324 1057 1051 1011 1152 826 958 {\ldots}
+ \$ Banano          : int  722 819 762 799 967 1152 1156 1177 1227 1163 {\ldots}
+ \$ Lulo            : int  1749 1732 1576 1650 1599 1881 1992 1965 1978 2189 {\ldots}
+ \$ Mora            : int  1497 1638 1843 1970 2067 2304 2527 2937 2480 1703 {\ldots}
+ \$ Papaya          : int  1063 1093 1041 1034 1073 1200 1206 1295 1249 1200 {\ldots}
+ \$ Patilla         : int  600 600 607 663 698 727 719 703 688 625 {\ldots}
+ \$ Pinna           : int  625 632 579 635 626 716 684 702 686 730 {\ldots}
+ \$ Arracacha       : int  1130 1149 1067 1075 1013 979 1048 925 1016 1089 {\ldots}
+ \$ Papa            : int  814 799 781 783 787 735 723 719 715 818 {\ldots}
+ \$ Plátano         : int  1291 1163 1103 1158 1075 1140 1180 1520 1631 1680 {\ldots}
+ \$ Yuca            : int  1240 1108 856 836 846 833 866 804 878 847 {\ldots}
+NULL
+[1] "Resumen descriptivo de los datos"
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+        Fecha        Ahuyama            Ajo           Arverja    
+ 21/12/2013:  2   Min.   : 422.0   Min.   : 2341   Min.   :1163  
+ 01/02/2014:  1   1st Qu.: 568.0   1st Qu.: 3298   1st Qu.:2160  
+ 01/03/2014:  1   Median : 660.0   Median : 5000   Median :2660  
+ 01/04/2017:  1   Mean   : 700.4   Mean   : 5497   Mean   :2933  
+ 01/05/2015:  1   3rd Qu.: 800.0   3rd Qu.: 7921   3rd Qu.:3350  
+ 01/07/2017:  1   Max.   :1354.0   Max.   :11000   Max.   :8033  
+ (Other)   :254                                    NA's   :1     
+ Cebolla.Cabezona Cebolla.junca     Cilantro         Cebada          Maiz     
+ Min.   : 386     Min.   : 418   Min.   : 2264   Min.   :1603   Min.   :1769  
+ 1st Qu.: 808     1st Qu.: 810   1st Qu.: 4838   1st Qu.:1656   1st Qu.:1907  
+ Median :1225     Median :1019   Median : 6000   Median :1753   Median :1960  
+ Mean   :1301     Mean   :1113   Mean   : 6344   Mean   :1771   Mean   :1994  
+ 3rd Qu.:1657     3rd Qu.:1245   3rd Qu.: 7500   3rd Qu.:1893   3rd Qu.:2080  
+ Max.   :3350     Max.   :3239   Max.   :15146   Max.   :2037   Max.   :2272  
+                                 NA's   :3                                    
+     Frijol       Habichuela      Lechuga        Perejil         Pimenton   
+ Min.   :1066   Min.   : 553   Min.   : 667   Min.   : 1769   Min.   : 988  
+ 1st Qu.:1719   1st Qu.:1078   1st Qu.: 957   1st Qu.: 4000   1st Qu.:1386  
+ Median :2077   Median :1367   Median :1025   Median : 4984   Median :1781  
+ Mean   :2166   Mean   :1441   Mean   :1086   Mean   : 5392   Mean   :1911  
+ 3rd Qu.:2477   3rd Qu.:1724   3rd Qu.:1159   3rd Qu.: 6000   3rd Qu.:2188  
+ Max.   :4013   Max.   :3569   Max.   :2427   Max.   :13000   Max.   :4104  
+                                              NA's   :1                     
+ Repollo.blanco     Tomate         Banano          Lulo           Mora     
+ Min.   : 400   Min.   : 674   Min.   : 722   Min.   :1549   Min.   :1365  
+ 1st Qu.: 510   1st Qu.:1144   1st Qu.:1124   1st Qu.:2205   1st Qu.:1980  
+ Median : 638   Median :1432   Median :1250   Median :2521   Median :2286  
+ Mean   : 682   Mean   :1604   Mean   :1334   Mean   :2636   Mean   :2433  
+ 3rd Qu.: 752   3rd Qu.:1982   3rd Qu.:1600   3rd Qu.:2945   3rd Qu.:2750  
+ Max.   :1440   Max.   :3442   Max.   :1925   Max.   :4575   Max.   :5650  
+                                                                           
+     Papaya        Patilla           Pinna         Arracacha         Papa     
+ Min.   : 850   Min.   : 575.0   Min.   :460.0   Min.   : 572   Min.   : 627  
+ 1st Qu.:1098   1st Qu.: 740.0   1st Qu.:631.0   1st Qu.: 780   1st Qu.: 900  
+ Median :1255   Median : 855.0   Median :676.0   Median :1024   Median :1000  
+ Mean   :1280   Mean   : 855.8   Mean   :665.4   Mean   :1407   Mean   :1089  
+ 3rd Qu.:1423   3rd Qu.: 950.0   3rd Qu.:716.0   3rd Qu.:1755   3rd Qu.:1242  
+ Max.   :2440   Max.   :1211.0   Max.   :862.0   Max.   :4107   Max.   :2000  
+                                                                NA's   :15    
+    Plátano          Yuca       
+ Min.   : 992   Min.   : 596.0  
+ 1st Qu.:1182   1st Qu.: 714.0  
+ Median :1328   Median : 833.0  
+ Mean   :1419   Mean   : 930.2  
+ 3rd Qu.:1562   3rd Qu.:1143.0  
+ Max.   :2448   Max.   :1664.0  
+                                
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Visualización de los datos perdidos"
+
+    \end{Verbatim}
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{imputaciuxf3n-del-dataset}{%
+\subsection{Imputación del Dataset}\label{imputaciuxf3n-del-dataset}}
+
+    Teniendo en cuenta que no están presentes todos los datos en el Dataset
+de precios, se procede a realizar la imputación del mismo. Para la
+imputación se realiza un cálculo previo de la cantidad de datos
+perdidos, con dicho valor y teniendo en cuenta la dispersión de los
+datos observadas en la Figura \textbf{Visualización de datos perdidos},
+se selecciona la imputación de promedio de k vecinos, con 5 vecinos
+\textbf{BUSCAR CITA}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{}Cálculo de datos perdidos}
+         \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{La cantidad de datos perdido por variable antes de imputar es\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{colSums}\PY{p}{(}is.na \PY{p}{(}DATA\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Imputación mediante k vecinos}
+         \PY{c+c1}{\PYZsh{}Se aplica la función kNN (K Nearest Neighbour Imputation) y se guarda como una nueva variable}
+         DATA\PYZus{}IMP\PY{o}{\PYZlt{}\PYZhy{}}kNN\PY{p}{(}DATA\PY{p}{,} variable \PY{o}{=} \PY{k+kp}{colnames}\PY{p}{(}DATA\PY{p}{)}\PY{p}{,} metric \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} k \PY{o}{=} \PY{l+m}{5}\PY{p}{,}
+           dist\PYZus{}var \PY{o}{=} \PY{k+kp}{colnames}\PY{p}{(}DATA\PY{p}{)}\PY{p}{,} weights \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} numFun \PY{o}{=} median\PY{p}{,}
+           catFun \PY{o}{=} maxCat\PY{p}{,} makeNA \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} NAcond \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} impNA \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,}
+           donorcond \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} mixed \PY{o}{=} \PY{k+kt}{vector}\PY{p}{(}\PY{p}{)}\PY{p}{,} mixed.constant \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,}
+           trace \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,} imp\PYZus{}var \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} imp\PYZus{}suffix \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{imp\PYZdq{}}\PY{p}{,} addRandom \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,}
+           useImputedDist \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} weightDist \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Los datos son actualizados en el Dataframe}
+         DATA\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{as.data.frame}\PY{p}{(}DATA\PYZus{}IMP\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "La cantidad de datos perdido por variable antes de imputar es"
+
+    \end{Verbatim}
+
+    \begin{description*}
+\item[Fecha] 0
+\item[Ahuyama] 0
+\item[Ajo] 0
+\item[Arverja] 1
+\item[Cebolla.Cabezona] 0
+\item[Cebolla.junca] 0
+\item[Cilantro] 3
+\item[Cebada] 0
+\item[Maiz] 0
+\item[Frijol] 0
+\item[Habichuela] 0
+\item[Lechuga] 0
+\item[Perejil] 1
+\item[Pimenton] 0
+\item[Repollo.blanco] 0
+\item[Tomate] 0
+\item[Banano] 0
+\item[Lulo] 0
+\item[Mora] 0
+\item[Papaya] 0
+\item[Patilla] 0
+\item[Pinna] 0
+\item[Arracacha] 0
+\item[Papa] 15
+\item[Plátano] 0
+\item[Yuca] 0
+\end{description*}
+
+
+    
+    Finalmente, las series históricas se presentan visualmente a
+continuación:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{}Primero se construye una función para graficar todas las series de manera independiente utilziando un bucle}
+         
+         \PY{c+c1}{\PYZsh{}Creación de la función}
+         GRAFICAR \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} na.rm \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} \PY{k+kc}{...}\PY{p}{)}
+             \PY{p}{\PYZob{}}
+             nm \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{names}\PY{p}{(}x\PY{p}{)}
+               \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{k+kp}{seq\PYZus{}along}\PY{p}{(}nm\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}x\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+                 \PY{p}{\PYZob{}}
+                   
+                 plots \PY{o}{\PYZlt{}\PYZhy{}}ggplot\PY{p}{(}x\PY{p}{,}aes\PY{p}{(}\PY{k+kp}{as.Date.character}\PY{p}{(}x\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}m/\PYZpc{}d/\PYZpc{}Y\PYZdq{}}\PY{p}{)}\PY{p}{,} x\PY{p}{[}\PY{p}{,}\PY{p}{(}i\PY{l+m}{+1}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}line\PY{p}{(}\PY{p}{)}
+                   plots\PY{o}{\PYZlt{}\PYZhy{}}plots\PY{o}{+}labs\PY{p}{(}x \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Fecha\PYZdq{}}\PY{p}{)}\PY{o}{+}labs\PY{p}{(}y \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Pesos colombianos [COP]\PYZdq{}}\PY{p}{)}\PY{o}{+}labs\PY{p}{(}title \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Precio historico para el producto:\PYZdq{}}\PY{p}{,} subtitle \PY{o}{=} nm\PY{p}{[}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}\PY{o}{+}scale\PYZus{}x\PYZus{}date\PY{p}{(}date\PYZus{}labels \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}b \PYZpc{}Y\PYZdq{}}\PY{p}{)}
+                 \PY{k+kp}{print}\PY{p}{(}plots\PY{p}{)}
+         
+                   \PY{c+c1}{\PYZsh{}Opcional si desean guardar la imagen}
+                   \PY{c+c1}{\PYZsh{}ggplot(x,aes(x[,1], x[,(i)])) + geom\PYZus{}line()}
+                   \PY{c+c1}{\PYZsh{}ggsave(plots,filename=paste(\PYZdq{}00 \PYZdq{},nm[i],\PYZdq{}.png\PYZdq{},sep=\PYZdq{}\PYZdq{}))}
+                 \PY{p}{\PYZcb{}}
+             \PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{}Fin de la función}
+         
+         \PY{c+c1}{\PYZsh{}Se ejecuta la función}
+         GRAFICAR\PY{p}{(}DATA\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_23.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_25.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_27.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_31.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_33.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_35.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_37.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_41.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_43.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_45.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+"Removed 155 rows containing missing values (geom\_path)."
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_47.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_48.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verificaciuxf3n-de-los-supuestos-de-estacionariedad}{%
+\section{ 2. Verificación de los supuestos de
+Estacionariedad}\label{verificaciuxf3n-de-los-supuestos-de-estacionariedad}}
+
+    Una vez construído el Dataset, se aplican diversas pruebas con el
+propósito de determinan si las series son o no estacionarias.
+
+    \hypertarget{descripciuxf3n-de-las-pruebas}{%
+\subsection{2.1 Descripción de las
+pruebas}\label{descripciuxf3n-de-las-pruebas}}
+
+    \hypertarget{prueba-de-raiz-unitaria}{%
+\subsubsection{2.1.1 Prueba de raiz
+Unitaria}\label{prueba-de-raiz-unitaria}}
+
+    Las primeras tres pruebas aplicadas durante el presente trabajo
+pertenecen a la familia de las raíces unitarias, las cuales según citan
+Nisar y Hanif: (2012, p.~418) ``pueden ser usadas para evaluar la
+eficiencia de los mercados, puesto que dicho comportamiento demanda
+aleatoriedad (i.e.~serie no estacionaria) en los precios (Hassan,
+Abdullah, \& Shah, 2007)''. Éstas son evaluadas utilizando el paquete
+``urca''.
+
+\textbf{1. Raíz unitaria con deriva y con tendencia} La primera prueba
+se enfoca en determinar si el modelo general de regresión se comporta
+como el descrito a continuación: \begin{equation*}
+Y_t= β_1  + β_2 t + β_3 Y_(t-1)  + u_t
+\end{equation*} Donde \(u_t\) es un término de error de ruido blanco (se
+distribuye normalmente con media = 0 y varianza = 1), \(t\) es el tiempo
+medido cronológicamente, \(Y_t\) la realización de la serie, \(β_1\)
+indica el valor de deriva, \(β_2\) la tendencia temporal y \(β_3\) la
+raíz del proceso.
+
+\textbf{2. Raíz unitaria con deriva y sin tendencia} Del modelo general
+de regresión se puede presentar una forma especial en la cual \(β_1≠0\),
+\(β_2=0\), \(β_3=1\), y se conoce como Caminata Aleatoria con Deriva
+(CAD), ésta se caracteriza por ser no estacionaria con tendencia
+determinista: \begin{equation*}
+Y_t= β_1  +  β_3 Y_(t-1)  + u_t
+\end{equation*}
+
+\textbf{3. Raíz unitaria sin deriva y sin tendencia} Del modelo general
+de regresión se puede presentar una forma especial en la cual \(β_1=0\),
+\(β_2=0\), \(β_3=1\), y es conocido como Caminata Aleatoria Pura (CAP),
+el cual genera un proceso no estacionario:
+
+\begin{equation*}
+Y_t= Y_(t-1)  + u_t
+\end{equation*}
+
+    \hypertarget{prueba-de-rachas-prueba-de-geary}{%
+\subsubsection{2.1.2 Prueba de rachas (Prueba de
+Geary)}\label{prueba-de-rachas-prueba-de-geary}}
+
+    El cuarto test aplicado es una prueba no paramétrica que busca
+determinar si las realizaciones en una serie siguen un comportamiento
+aleatorio (Geary, 1935; Gujarati \& Porter, 2010), para ello se estima
+un valor crítico Z teniendo en cuenta la siguiente ecuación:
+\begin{equation*}
+Z= R-X⁄σ^2 
+\end{equation*} Donde \(Z\) es una variable que se distribuye de manera
+Normal, \(R\) es el número total de rachas,
+\(X= ((2*n^1*n^2 ))⁄((n)+1)\) (Media de la serie), \(n^1\) representa el
+número total de rachas positivas, \(n^2\) el número total de rachas
+negativas, \(n= (n^1+n^2 )\), \$ σ\^{}2=
+((2\emph{n\textsuperscript{1\emph{n\textsuperscript{2\emph{(2}n}1}n}2-n)))⁄(((n)\^{}2}(n-1)))\$
+(Varianza de la serie).
+
+    \hypertarget{anuxe1lisis-de-auto-correlaciones-prueba-d-de-dubrin-watson}{%
+\subsubsection{2.1.3 Análisis de Auto correlaciones (Prueba d, de
+Dubrin-Watson)}\label{anuxe1lisis-de-auto-correlaciones-prueba-d-de-dubrin-watson}}
+
+    La quinta prueba es el análisis de auto correlaciones de Durbin-Watson
+(Savin \& White, 1977), ésta se utiliza para detectar la presencia de
+auto correlación en los residuos (errores de predicción) de un análisis
+de la regresión. El estadístico es calculado a continuación:
+
+\begin{equation*}
+d=\frac{\sum_{t=2}^T (e_t-e_(t-1))^2}{\sum_{t=1}^T(e_t)^2}
+\end{equation*}
+
+Donde \(d≈(2- β_3)\), i8ndicando que \(β_3\) representa el grado de
+correlación de la muestra de los residuos. Un valor ``d = 2'' indica que
+no hay auto correlación.
+
+    \hypertarget{estimaciuxf3n-del-coeficiente-de-hurst}{%
+\subsubsection{2.1.4 Estimación del coeficiente de
+Hurst}\label{estimaciuxf3n-del-coeficiente-de-hurst}}
+
+    La sexta prueba es la estimación del coeficiente de Hurst, éste es una
+medida que indica el grado de independencia de las series de tiempo.
+Cuando el valor del coeficiente se encuentre en \(H=0.5\), se considera
+que la serie tiene un comportamiento de ruido blanco. Por otra parte, si
+\((0.5≤H<1]\) se dice que la serie presenta persistencia o auto
+correlaciones, de manera análoga, si \([0≤H≤0.5)\) la serie presenta un
+comportamiento anti persistente o de correlación negativa. Durante el
+presente trabajo es aplicada la variante propuesta por Andrew Lo, la
+cual tiene en cuenta la memoria interna de la serie, donde
+\$\{\hat\sigma\_x\}\^{}2 \$ y \$\{\hat y\_j\}\^{}2 \$ son los
+estimadores de varianza y covarianza de la serie, \(a\) el tamaño de la
+subserie, \(R(N)\) el rango de datos de la subserie:
+
+\begin{equation*}
+F'(N)= \frac{R(N)}{({\hat\sigma_x}^2 +2\sum_{j=1}^a(1-\frac{j}{a+1})*\hat{y_j})^2}
+\end{equation*}
+
+    \hypertarget{resultados-de-las-pruebas}{%
+\subsection{2.2 Resultados de las
+pruebas}\label{resultados-de-las-pruebas}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{c+c1}{\PYZsh{}Con el fin de evitar sobre utilizar bucles, para esta etapa se programará la estimación de las pruebas, y éstas se imprimiran posteriormente}
+          
+          \PY{c+c1}{\PYZsh{}Se construye una variable donde se almacenarán los resultados}
+          COEF\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{as.data.frame}\PY{p}{(}\PY{k+kp}{replicate}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{,} \PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Se programa una función que estime el coeficiente de Hurst}
+          \PY{c+c1}{\PYZsh{}Inicio de la función}
+          hurst \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)}
+          \PY{p}{\PYZob{}}
+            
+            N \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{length}\PY{p}{(}x\PY{p}{)}
+            s \PY{o}{\PYZlt{}\PYZhy{}} x\PY{p}{[}\PY{l+m}{2}\PY{o}{:}N\PY{p}{]}
+            t \PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{1}\PY{o}{:}N
+            par1\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{3}
+            RS\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}par1\PY{p}{)}
+            tau\PY{o}{\PYZlt{}\PYZhy{}}RS
+            \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}par1\PY{p}{)}\PY{p}{\PYZob{}}
+              m \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{floor}\PY{p}{(}N\PY{o}{/}\PY{p}{(}i\PY{p}{)}\PY{p}{)}
+              R\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}i\PY{p}{)}
+              S\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}i\PY{p}{)}
+              Var\PY{o}{\PYZlt{}\PYZhy{}}R
+              \PY{k+kr}{for}\PY{p}{(}j \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}i\PY{p}{)}\PY{p}{\PYZob{}}
+                smin\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{1}\PY{o}{+}\PY{p}{(}j\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{o}{*}m
+                smax\PY{o}{\PYZlt{}\PYZhy{}}j\PY{o}{*}m\PY{l+m}{\PYZhy{}1}
+                r \PY{o}{\PYZlt{}\PYZhy{}} s\PY{p}{[}smin\PY{o}{:}smax\PY{p}{]}
+                M\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{mean}\PY{p}{(}r\PY{p}{)}
+                x2\PY{o}{\PYZlt{}\PYZhy{}}r\PY{o}{\PYZhy{}}M
+                V \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cumsum}\PY{p}{(}x2\PY{p}{)}
+                R\PY{p}{[}j\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{max}\PY{p}{(}V\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{min}\PY{p}{(}V\PY{p}{)}
+                Var\PY{p}{[}j\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}var\PY{p}{(}r\PY{p}{)}
+                wj\PY{o}{\PYZlt{}\PYZhy{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}\PY{p}{(}j\PY{o}{/}\PY{p}{(}i\PY{l+m}{+1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                x22\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}
+                \PY{k+kr}{for}\PY{p}{(}z \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}x2\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+                  x22\PY{p}{[}z\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}x2\PY{p}{[}z\PY{p}{]}\PY{o}{*}x2\PY{p}{[}z\PY{l+m}{+1}\PY{p}{]}
+                \PY{p}{\PYZcb{}}
+                cova\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x22\PY{p}{)}
+                S\PY{p}{[}j\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}Var\PY{p}{[}j\PY{p}{]} \PY{o}{+}  \PY{l+m}{2}\PY{o}{*}wj\PY{o}{*}cova\PY{o}{/}m\PY{p}{)}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{0.5}\PY{p}{)}
+              \PY{p}{\PYZcb{}}
+              tau\PY{p}{[}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}m
+              RS\PY{p}{[}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{mean}\PY{p}{(}R\PY{o}{/}S\PY{p}{)} 
+            \PY{p}{\PYZcb{}}
+            XX\PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}\PY{k+kp}{log10}\PY{p}{(}tau\PY{p}{)}\PY{p}{,}\PY{k+kp}{log10}\PY{p}{(}RS\PY{p}{)}\PY{p}{)}
+            x \PY{o}{\PYZlt{}\PYZhy{}} XX\PY{o}{\PYZdl{}}log10.tau.
+            y \PY{o}{\PYZlt{}\PYZhy{}} XX\PY{o}{\PYZdl{}}log10.RS.
+            n \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{nrow}\PY{p}{(}XX\PY{p}{)}
+            xy \PY{o}{\PYZlt{}\PYZhy{}} x\PY{o}{*}y
+            m2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}n\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}xy\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x\PY{p}{)}\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}y\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}n\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}x\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+            m2
+            
+            \PY{k+kr}{return}\PY{p}{(}m2\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          \PY{c+c1}{\PYZsh{}Fin de la función}
+          
+          \PY{c+c1}{\PYZsh{}Se inicia un bucle que recorra el listado de productos}
+          \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{)}
+          \PY{p}{\PYZob{}}
+              \PY{c+c1}{\PYZsh{}Prueba de raíz unitaria}
+              \PY{c+c1}{\PYZsh{} Si el p\PYZhy{}valor es menor que 0.05 no podemos rechazar:}
+              
+              \PY{c+c1}{\PYZsh{}se transforman los datos}
+              DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{as.data.frame.vector}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}Se aplican todas las pruebas, bajo el supuesto de la existencia de una tendencia, para evaluar las 3 hipótesis}
+              \PY{c+c1}{\PYZsh{}los datos son almacenados en la variable COEF para las tres primeras filas}
+          
+              df\PY{o}{\PYZlt{}\PYZhy{}}ur.df\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{trend\PYZdq{}}\PY{p}{,}lags\PY{o}{=}\PY{l+m}{0}\PY{p}{,} selectlags \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{AIC\PYZdq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}tendencia, }
+              COEF\PY{p}{[}\PY{l+m}{1}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{summary}\PY{p}{(}df\PY{p}{)}\PY{o}{@}testreg\PY{o}{\PYZdl{}}coefficients\PY{p}{[}\PY{l+m}{10}\PY{p}{]} \PY{c+c1}{\PYZsh{}Hipótesis nula, Hay raiz unitaria}
+              COEF\PY{p}{[}\PY{l+m}{2}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{summary}\PY{p}{(}df\PY{p}{)}\PY{o}{@}testreg\PY{o}{\PYZdl{}}coefficients\PY{p}{[}\PY{l+m}{11}\PY{p}{]} \PY{c+c1}{\PYZsh{}Hipótesis nula, Hay raiz unitaria sin tendencia}
+              COEF\PY{p}{[}\PY{l+m}{3}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{summary}\PY{p}{(}df\PY{p}{)}\PY{o}{@}testreg\PY{o}{\PYZdl{}}coefficients\PY{p}{[}\PY{l+m}{12}\PY{p}{]} \PY{c+c1}{\PYZsh{}Hipótesis nula, Hay raiz unitaria sin tendencia y sin deriva}
+                
+              \PY{c+c1}{\PYZsh{}Prueba de rachas}
+              \PY{c+c1}{\PYZsh{}si P valor \PYZgt{}5\PYZpc{}, no hay evidencias para considerar los datos no aleatorios.}
+              xr\PY{o}{\PYZlt{}\PYZhy{}}DATA\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{o}{/}DATA\PY{p}{[}\PY{l+m}{1}\PY{o}{:}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}
+              a\PY{o}{\PYZlt{}\PYZhy{}} randtests\PY{o}{::}runs.test\PY{p}{(}xr\PY{p}{)}
+              
+              COEF\PY{p}{[}\PY{l+m}{4}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}a\PY{o}{\PYZdl{}}p.value
+              \PY{c+c1}{\PYZsh{}Autocorrelaciones}
+              \PY{c+c1}{\PYZsh{}si el pvalor es mayor a 0.05, se rechaza la hipótesis nula (Autocorrelación=0)}
+              x1\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{1}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+              aut\PY{o}{\PYZlt{}\PYZhy{}}dwtest\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]} \PY{o}{\PYZti{}} x1\PY{p}{)} 
+              COEF\PY{p}{[}\PY{l+m}{5}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}aut\PY{o}{\PYZdl{}}p.value
+            
+          
+              \PY{c+c1}{\PYZsh{}Coeficiente de Hurst}
+              
+              \PY{c+c1}{\PYZsh{}Se transforman los datos para determinar su rendimiento}
+              xr\PY{o}{\PYZlt{}\PYZhy{}}DATA\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{o}{/}DATA\PY{p}{[}\PY{l+m}{1}\PY{o}{:}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{,}i\PY{l+m}{+1}\PY{p}{]}
+              \PY{c+c1}{\PYZsh{}Se aplica la función para estimar el coeficiente de Hurst y se almacena en la sexta posición}
+              COEF\PY{p}{[}\PY{l+m}{6}\PY{p}{,}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}hurst\PY{p}{(}xr\PY{p}{)}
+            
+            
+          \PY{p}{\PYZcb{}}
+          \PY{c+c1}{\PYZsh{}Se cambia el formato de los valores}
+          COEF\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{format}\PY{p}{(}COEF\PY{p}{,} scientific\PY{o}{=}\PY{k+kc}{FALSE}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}Se guardan los valores d emanera local}
+          write.csv\PY{p}{(}COEF\PY{p}{,} file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{COEFICIENTES\PYZus{}FINAL.csv\PYZdq{}}\PY{p}{)}  
+          
+          \PY{c+c1}{\PYZsh{}Se transforma el formato de los valores para poder hacer cálculos}
+          COEF\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{data.matrix}\PY{p}{(}COEF\PY{p}{,} rownames.force \PY{o}{=} \PY{k+kc}{NA}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}Para mejorar la visualziación, se truncan los valores}
+          COEF\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{round}\PY{p}{(}COEF\PY{p}{,}\PY{l+m}{3}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Con el fin de presentar cada prueba por separado, se transforma y transpone la matriz de coeficientes}
+          n\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{colnames}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}\PY{l+m}{\PYZhy{}1}\PY{p}{]}\PY{p}{)}
+          
+          DATA2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}\PY{k+kp}{t}\PY{p}{(}COEF\PY{p}{[}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Raiz Unitaria\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Raiz unitaria sin tendencia\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Raiz unitaria sin tendencia y sin deriva\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{4}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Raiz Prueba de rachas\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{5}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Raiz Autocorrelaciones\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{names}\PY{p}{(}DATA2\PY{p}{)}\PY{p}{[}\PY{l+m}{6}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Coeficiente de Hurst\PYZdq{}}\PY{p}{)}
+          DATA2\PY{o}{\PYZdl{}}NOMBRE\PY{o}{\PYZlt{}\PYZhy{}}n
+          \PY{k+kp}{row.names}\PY{p}{(}DATA2\PY{p}{)} \PY{o}{\PYZlt{}\PYZhy{}} n
+          DATA2
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllll}
+  & Raiz Unitaria & Raiz unitaria sin tendencia & Raiz unitaria sin tendencia y sin deriva & Raiz Prueba de rachas & Raiz Autocorrelaciones & Coeficiente de Hurst & NOMBRE\\
+\hline
+	Ahuyama & 0.010            & 0.003            & 0.420            & 0.083            & 0                & 0.323            & Ahuyama         \\
+	Ajo & 0.190            & 0.019            & 0.045            & 0.001            & 0                & 0.159            & Ajo             \\
+	Arverja & 0.016            & 0.001            & 0.227            & 0.384            & 0                & 0.268            & Arverja         \\
+	Cebolla.Cabezona & 0.054            & 0.003            & 0.283            & 0.013            & 0                & 0.297            & Cebolla.Cabezona\\
+	Cebolla.junca & 0.013            & 0.000            & 0.015            & 0.000            & 0                & 0.279            & Cebolla.junca   \\
+	Cilantro & 0.000            & 0.000            & 0.170            & 0.618            & 0                & 0.275            & Cilantro        \\
+	Cebada & 0.000            & 0.000            & 0.000            & 0.000            & 0                & 0.378            & Cebada          \\
+	Maiz & 0.000            & 0.000            & 0.000            & 0.000            & 0                & 0.083            & Maiz            \\
+	Frijol & 0.000            & 0.000            & 0.299            & 0.709            & 0                & 0.333            & Frijol          \\
+	Habichuela & 0.000            & 0.000            & 0.480            & 0.709            & 0                & 0.155            & Habichuela      \\
+	Lechuga & 0.000            & 0.000            & 0.477            & 0.080            & 0                & 0.296            & Lechuga         \\
+	Perejil & 0.001            & 0.000            & 0.131            & 0.270            & 0                & 0.236            & Perejil         \\
+	Pimenton & 0.001            & 0.000            & 0.072            & 0.106            & 0                & 0.318            & Pimenton        \\
+	Repollo.blanco & 0.001            & 0.000            & 0.985            & 0.901            & 0                & 0.119            & Repollo.blanco  \\
+	Tomate & 0.001            & 0.000            & 0.374            & 0.901            & 0                & 0.177            & Tomate          \\
+	Banano & 0.000            & 0.000            & 0.003            & 0.544            & 0                & 0.351            & Banano          \\
+	Lulo & 0.002            & 0.002            & 0.719            & 0.901            & 0                & 0.468            & Lulo            \\
+	Mora & 0.000            & 0.000            & 0.640            & 0.456            & 0                & 0.186            & Mora            \\
+	Papaya & 0.004            & 0.003            & 0.639            & 0.000            & 0                & 0.391            & Papaya          \\
+	Patilla & 0.000            & 0.000            & 0.039            & 0.018            & 0                & 0.187            & Patilla         \\
+	Pinna & 0.000            & 0.000            & 0.154            & 0.106            & 0                & 0.165            & Pinna           \\
+	Arracacha & 0.262            & 0.028            & 0.499            & 0.000            & 0                & 0.510            & Arracacha       \\
+	Papa & 0.050            & 0.058            & 0.840            & 0.099            & 0                & 0.154            & Papa            \\
+	Plátano & 0.000            & 0.000            & 0.616            & 0.047            & 0                & 0.110            & Plátano         \\
+	Yuca & 0.015            & 0.001            & 0.143            & 0.001            & 0                & 0.611            & Yuca            \\
+\end{tabular}
+
+
+    
+    \hypertarget{prueba-de-rauxedz-unitaria}{%
+\subsubsection{2.2.1 Prueba de raíz
+unitaria}\label{prueba-de-rauxedz-unitaria}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}242}]:} \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan un comportamiento de raiz unitaria\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan un comportamiento de raiz unitaria sin tendencia\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan un comportamiento de raiz unitaria sin tendencia y sin deriva\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{3}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{3}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan un comportamiento de raiz unitaria"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    22
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Ahuyama'
+\item 'Arverja'
+\item 'Cebolla.junca'
+\item 'Cilantro'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Frijol'
+\item 'Habichuela'
+\item 'Lechuga'
+\item 'Perejil'
+\item 'Pimenton'
+\item 'Repollo.blanco'
+\item 'Tomate'
+\item 'Banano'
+\item 'Lulo'
+\item 'Mora'
+\item 'Papaya'
+\item 'Patilla'
+\item 'Pinna'
+\item 'Papa'
+\item 'Plátano'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan un comportamiento de raiz unitaria sin tendencia"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    24
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Ahuyama'
+\item 'Ajo'
+\item 'Arverja'
+\item 'Cebolla.Cabezona'
+\item 'Cebolla.junca'
+\item 'Cilantro'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Frijol'
+\item 'Habichuela'
+\item 'Lechuga'
+\item 'Perejil'
+\item 'Pimenton'
+\item 'Repollo.blanco'
+\item 'Tomate'
+\item 'Banano'
+\item 'Lulo'
+\item 'Mora'
+\item 'Papaya'
+\item 'Patilla'
+\item 'Pinna'
+\item 'Arracacha'
+\item 'Plátano'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan un comportamiento de raiz unitaria sin tendencia y sin deriva"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    6
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Ajo'
+\item 'Cebolla.junca'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Banano'
+\item 'Patilla'
+\end{enumerate*}
+
+
+    
+    \hypertarget{prueba-de-rachas}{%
+\subsubsection{2.2.2 Prueba de rachas}\label{prueba-de-rachas}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}243}]:} \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan un comportamiento aleatorio\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{4}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{4}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan un comportamiento aleatorio"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    10
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Ajo'
+\item 'Cebolla.Cabezona'
+\item 'Cebolla.junca'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Papaya'
+\item 'Patilla'
+\item 'Arracacha'
+\item 'Plátano'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+    \hypertarget{anuxe1lisis-de-autocorrelaciones}{%
+\subsubsection{2.2.3 Análisis de
+autocorrelaciones}\label{anuxe1lisis-de-autocorrelaciones}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}244}]:} \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan una autocorrelación\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}\PY{o}{\PYZlt{}=}\PY{l+m}{0.05}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan una autocorrelación"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    25
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Ahuyama'
+\item 'Ajo'
+\item 'Arverja'
+\item 'Cebolla.Cabezona'
+\item 'Cebolla.junca'
+\item 'Cilantro'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Frijol'
+\item 'Habichuela'
+\item 'Lechuga'
+\item 'Perejil'
+\item 'Pimenton'
+\item 'Repollo.blanco'
+\item 'Tomate'
+\item 'Banano'
+\item 'Lulo'
+\item 'Mora'
+\item 'Papaya'
+\item 'Patilla'
+\item 'Pinna'
+\item 'Arracacha'
+\item 'Papa'
+\item 'Plátano'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+    \hypertarget{estimaciuxf3n-del-coeficiente-de-hurst}{%
+\subsubsection{2.2.4 Estimación del coeficiente de
+Hurst}\label{estimaciuxf3n-del-coeficiente-de-hurst}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}247}]:} \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Estos son los productos que presentan un comportamiento de ruido blanco (H aproximadamente 0.5)\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total de productos:\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{length}\PY{p}{(}DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{o}{\PYZgt{}=}\PY{l+m}{0.4804} \PY{o}{|} DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{o}{\PYZgt{}=}\PY{l+m}{0.5245}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}\PY{p}{)}
+          \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nombre de los productos:\PYZdq{}}\PY{p}{)}
+          DATA2\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{o}{\PYZgt{}=}\PY{l+m}{0.4804} \PY{o}{|} DATA2\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{o}{\PYZgt{}=}\PY{l+m}{0.5245}\PY{p}{)}\PY{p}{,}\PY{l+m}{7}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Estos son los productos que presentan un comportamiento de ruido blanco (H aproximadamente 0.5)"
+[1] "Total de productos:"
+
+    \end{Verbatim}
+
+    2
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Nombre de los productos:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item 'Arracacha'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+    \hypertarget{construcciuxf3n-general-del-modelo-arima}{%
+\section{ 3. Construcción general del modelo
+Arima}\label{construcciuxf3n-general-del-modelo-arima}}
+
+    \hypertarget{construcciuxf3n-del-modelo-garch}{%
+\section{ 4. Construcción del modelo
+Garch}\label{construcciuxf3n-del-modelo-garch}}
+
+    \hypertarget{ecuaciones-de-pronuxf3stico}{%
+\section{ 5. Ecuaciones de
+pronóstico}\label{ecuaciones-de-pronuxf3stico}}
+
+    \hypertarget{discusiuxf3n-y-observaciones-generales}{%
+\section{ 6. Discusión y observaciones
+generales}\label{discusiuxf3n-y-observaciones-generales}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+also installing the dependency 'foreign'
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+package 'foreign' successfully unpacked and MD5 sums checked
+package 'Amelia' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\textbackslash{}Users\textbackslash{}Usuario\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Temp\textbackslash{}RtmpemIx87\textbackslash{}downloaded\_packages
+
+    \end{Verbatim}
+
+    \hypertarget{creo-una-funciuxf3n-para-estimar-el-coeficiente-de-hurst}{%
+\section{Creo una función para estimar el coeficiente de
+Hurst}\label{creo-una-funciuxf3n-para-estimar-el-coeficiente-de-hurst}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} hurst\PYZus{}leo \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)}\PY{p}{\PYZob{}}
+           
+           N \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{length}\PY{p}{(}x\PY{p}{)}
+           s \PY{o}{\PYZlt{}\PYZhy{}} x\PY{p}{[}\PY{l+m}{2}\PY{o}{:}N\PY{p}{]}
+           t \PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{1}\PY{o}{:}N
+           par1\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{3}
+           RS\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}par1\PY{p}{)}
+           tau\PY{o}{\PYZlt{}\PYZhy{}}RS
+           \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}par1\PY{p}{)}\PY{p}{\PYZob{}}
+             m \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{floor}\PY{p}{(}N\PY{o}{/}\PY{p}{(}i\PY{p}{)}\PY{p}{)}
+             R\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}i\PY{p}{)}
+             S\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}i\PY{p}{)}
+             Var\PY{o}{\PYZlt{}\PYZhy{}}R
+             \PY{k+kr}{for}\PY{p}{(}j \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}i\PY{p}{)}\PY{p}{\PYZob{}}
+               smin\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{1}\PY{o}{+}\PY{p}{(}j\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{o}{*}m
+               smax\PY{o}{\PYZlt{}\PYZhy{}}j\PY{o}{*}m\PY{l+m}{\PYZhy{}1}
+               r \PY{o}{\PYZlt{}\PYZhy{}} s\PY{p}{[}smin\PY{o}{:}smax\PY{p}{]}
+               M\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{mean}\PY{p}{(}r\PY{p}{)}
+               x2\PY{o}{\PYZlt{}\PYZhy{}}r\PY{o}{\PYZhy{}}M
+               V \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cumsum}\PY{p}{(}x2\PY{p}{)}
+               R\PY{p}{[}j\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{max}\PY{p}{(}V\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{min}\PY{p}{(}V\PY{p}{)}
+               Var\PY{p}{[}j\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}var\PY{p}{(}r\PY{p}{)}
+               wj\PY{o}{\PYZlt{}\PYZhy{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}\PY{p}{(}j\PY{o}{/}\PY{p}{(}i\PY{l+m}{+1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+               x22\PY{o}{\PYZlt{}\PYZhy{}}\PY{l+m}{0}
+               \PY{k+kr}{for}\PY{p}{(}z \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}x2\PY{p}{)}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+                 x22\PY{p}{[}z\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}x2\PY{p}{[}z\PY{p}{]}\PY{o}{*}x2\PY{p}{[}z\PY{l+m}{+1}\PY{p}{]}
+               \PY{p}{\PYZcb{}}
+               cova\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x22\PY{p}{)}
+               S\PY{p}{[}j\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}Var\PY{p}{[}j\PY{p}{]} \PY{o}{+}  \PY{l+m}{2}\PY{o}{*}wj\PY{o}{*}cova\PY{o}{/}m\PY{p}{)}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{0.5}\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+             tau\PY{p}{[}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}m
+             RS\PY{p}{[}i\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{mean}\PY{p}{(}R\PY{o}{/}S\PY{p}{)} 
+           \PY{p}{\PYZcb{}}
+           XX\PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}\PY{k+kp}{log10}\PY{p}{(}tau\PY{p}{)}\PY{p}{,}\PY{k+kp}{log10}\PY{p}{(}RS\PY{p}{)}\PY{p}{)}
+           x \PY{o}{\PYZlt{}\PYZhy{}} XX\PY{o}{\PYZdl{}}log10.tau.
+           y \PY{o}{\PYZlt{}\PYZhy{}} XX\PY{o}{\PYZdl{}}log10.RS.
+           n \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{nrow}\PY{p}{(}XX\PY{p}{)}
+           xy \PY{o}{\PYZlt{}\PYZhy{}} x\PY{o}{*}y
+           m2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}n\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}xy\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x\PY{p}{)}\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}y\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}n\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}x\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{sum}\PY{p}{(}x\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+           m2
+           
+           \PY{k+kr}{return}\PY{p}{(}m2\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    Son cargados los datos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} DATA \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{DATA\PYZus{}BUCARA.csv\PYZdq{}}\PY{p}{,} header\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,} sep\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{;\PYZdq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}carga desd archivo .csv ubicado en root}
+          DATA \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}DATA\PY{p}{)} \PY{c+c1}{\PYZsh{}transformación de los datos a formato Data Frame}
+\end{Verbatim}
+
+
+    Se suavizan logaritmicamente los datos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} DATA\PY{p}{[}\PY{p}{,}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{log}\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}DATA\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{c+c1}{\PYZsh{}\PYZsq{}ejemplo del modelo de pronóstico}
+          BALts\PY{o}{\PYZlt{}\PYZhy{}}\PY{p}{(}ts\PY{p}{(}DATA\PY{p}{[}\PY{p}{,}\PY{l+m}{17}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          plot\PY{p}{(}BALts\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} ndiffs\PY{p}{(}BALts\PY{p}{,} test\PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{kpss\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          ndiffs\PY{p}{(}BALts\PY{p}{,} test\PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{adf\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          ndiffs\PY{p}{(}BALts\PY{p}{,} test\PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{pp\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    1
+
+    
+    1
+
+    
+    0
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} auto.arima\PY{p}{(}BALts\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Series: BALts 
+ARIMA(1,1,2) with drift         
+
+Coefficients:
+         ar1      ma1      ma2   drift
+      0.6870  -0.6951  -0.1439  2.9832
+s.e.  0.1467   0.1538   0.0720  1.5807
+
+sigma^2 estimated as 2374:  log likelihood=-1377.42
+AIC=2764.84   AICc=2765.08   BIC=2782.65
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} Arl1\PY{o}{\PYZlt{}\PYZhy{}}arima\PY{p}{(}BALts\PY{p}{,} order \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,} include.mean \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+          Arl1
+          f2\PY{o}{\PYZlt{}\PYZhy{}} forecast\PY{p}{(}Arl1\PY{p}{,} \PY{l+m}{5}\PY{p}{)}
+          f2
+          plot\PY{p}{(}f2\PY{p}{)}
+          acf\PY{p}{(}residuals\PY{p}{(}f2\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{}pg 782}
+          pacf\PY{p}{(}residuals\PY{p}{(}f2\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+arima(x = BALts, order = c(1, 1, 2), include.mean = TRUE)
+
+Coefficients:
+         ar1      ma1      ma2
+      0.6369  -0.6333  -0.1424
+s.e.  0.1804   0.1853   0.0692
+
+sigma^2 estimated as 2367:  log likelihood = -1378.98,  aic = 2765.96
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+    Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+262       1625.856 1563.511 1688.200 1530.508 1721.203
+263       1624.289 1535.966 1712.613 1489.210 1759.368
+264       1623.292 1519.859 1726.724 1465.105 1781.478
+265       1622.656 1508.518 1736.794 1448.098 1797.215
+266       1622.252 1499.667 1744.837 1434.774 1809.729
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{k+kp}{names}\PY{p}{(}X\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'Fecha'
+\item 'Ahuyama'
+\item 'Ajo'
+\item 'Arverja'
+\item 'Cebolla.Cabezona'
+\item 'Cebolla.junca'
+\item 'Cilantro'
+\item 'Cebada'
+\item 'Maiz'
+\item 'Frijol'
+\item 'Habichuela'
+\item 'Lechuga'
+\item 'Perejil'
+\item 'Pimenton'
+\item 'Repollo.blanco'
+\item 'Tomate'
+\item 'Banano'
+\item 'Lulo'
+\item 'Mora'
+\item 'Papaya'
+\item 'Patilla'
+\item 'Pinna'
+\item 'Arracacha'
+\item 'Papa'
+\item 'Plátano'
+\item 'Yuca'
+\end{enumerate*}
+
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
